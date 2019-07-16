@@ -6,6 +6,8 @@ import org.brijframework.mapper.factories.MapperModelFactory;
 import org.brijframework.mapper.model.ClsMapperModel;
 import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
 import org.brijframework.support.config.Assignable;
+import org.brijframework.support.model.mapper.BeanMapper;
+import org.brijframework.support.model.mapper.BeanMappers;
 import org.brijframework.support.model.mapper.PropertyMapper;
 import org.brijframework.support.model.mapper.PropertyMappers;
 import org.brijframework.util.accessor.PropertyAccessorUtil;
@@ -36,17 +38,17 @@ public class AnnotationClsMapperModelFactory extends MetaInfoFactoryImpl<ClsMapp
 	}
 
 	public void register(Class<?> target) {
-		if (target.isAnnotationPresent(PropertyMappers.class)) {
-			PropertyMappers mappers=target.getAnnotation(PropertyMappers.class);
-			for(PropertyMapper mapper:mappers.value()) {
+		if (target.isAnnotationPresent(BeanMappers.class)) {
+			BeanMappers mappers=target.getAnnotation(BeanMappers.class);
+			for(BeanMapper mapper:mappers.value()) {
 				register(target, mapper);
 			}
-		} else if (target.isAnnotationPresent(PropertyMapper.class)) {
-			register(target, target.getAnnotation(PropertyMapper.class));
+		} else if (target.isAnnotationPresent(BeanMapper.class)) {
+			register(target, target.getAnnotation(BeanMapper.class));
 		}
 	}
 
-	public ClsMapperModel register(Class<?> target, PropertyMapper mapper) {
+	public ClsMapperModel register(Class<?> target, BeanMapper mapper) {
 		Map<String, Object> properties = AnnotationUtil.getAnnotationData(mapper);
 		ClsMapperModel owner = new ClsMapperModel();
 		PropertyAccessorUtil.setProperties(owner, properties);
