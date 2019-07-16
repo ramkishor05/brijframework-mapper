@@ -4,11 +4,11 @@ import java.lang.reflect.Field;
 
 import org.brijframework.model.info.asm.AbstractModelInfo;
 
-public class MapperModel extends AbstractModelInfo<Field> {
+public class PptMapperModel extends AbstractModelInfo<Field> {
 
-	String source;
+	private String source;
 
-	String destination;
+	private String destination;
 
 	private Field target;
 
@@ -36,6 +36,5 @@ public class MapperModel extends AbstractModelInfo<Field> {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	
 	
 }
