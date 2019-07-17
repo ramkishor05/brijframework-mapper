@@ -1,18 +1,12 @@
 package org.brijframework.mapper.asm;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.brijframework.mapper.BeanMapper;
-import org.brijframework.mapper.model.ClsMapperModel;
-import org.brijframework.mapper.model.impl.ClsMapperModelFactoryImpl;
+import org.brijframework.mapper.model.impl.MapperUtil;
 import org.brijframework.util.asserts.Assertion;
-import org.brijframework.util.reflect.FieldUtil;
-import org.brijframework.util.reflect.InstanceUtil;
-import org.brijframework.util.support.Access;
 
 public class GenericMapper<E> implements BeanMapper<E> {
 
@@ -31,13 +25,28 @@ public class GenericMapper<E> implements BeanMapper<E> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public E mapped(Object object) {
-		Class<?> type=getGenericType(0);
-		Assertion.notNull(type, "Generic type not found.");
 		try {
+			Class<?> toClass=getGenericType(0);
+			Assertion.notNull(toClass, "Generic type should not be null or empty.");
 			if(object instanceof Map) {
-				return mappedFromMap((Map<String,Object>)object);
+				return (E) MapperUtil.classMappedFromMap(toClass,(Map<String,Object>)object);
 			}else {
-				return mappedFromObject(object);
+				return (E) MapperUtil.classMappedFromObject(toClass,object);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public E mappedTo(E toObject,Object fromObject) {
+		try {
+			Assertion.notNull(toObject, "To object should not be null or empty.");
+			if(fromObject instanceof Map) {
+				return (E) MapperUtil.mappedToObjectFromMap(toObject,(Map<String,Object>)fromObject);
+			}else {
+				return (E) MapperUtil.mappedToObjectFromObject(toObject,fromObject);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,37 +54,19 @@ public class GenericMapper<E> implements BeanMapper<E> {
 		return null;
 	}
 
-	public E mappedFromMap(Map<String,Object> properties) {
-		Class<?> type=getGenericType(0);
-		Assertion.notNull(type, "Generic type not found.");
+	@SuppressWarnings("unchecked")
+	public Object mappedFrom(E toObject,Object fromObject) {
 		try {
-			ClsMapperModel model=ClsMapperModelFactoryImpl.getFactory().load(type);
-			@SuppressWarnings("unchecked")
-			E e=(E) InstanceUtil.getInstance(type);
-			for(Entry<String, Object> entry: properties.entrySet()) {
-				
+			Assertion.notNull(toObject, "To object should not be null or empty.");
+			if(fromObject instanceof Map) {
+				return (E) MapperUtil.mappedFromObjectToMap(toObject,(Map<String,Object>)fromObject);
+			}else {
+				return (E) MapperUtil.mappedFromObjectToObject(toObject,fromObject);
 			}
-			return e;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public E mappedFromObject(Object properties) {
-		Class<?> type=getGenericType(0);
-		Assertion.notNull(type, "Generic type not found.");
-		try {
-			ClsMapperModel model=ClsMapperModelFactoryImpl.getFactory().load(type);
-			@SuppressWarnings("unchecked")
-			E e=(E) InstanceUtil.getInstance(type);
-			for(Field entry: FieldUtil.getAllField(properties.getClass(), Access.PRIVATE)) {
-				
-			}
-			return e;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+
 }

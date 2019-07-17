@@ -9,6 +9,7 @@ import org.brijframework.model.factories.asm.ClassMetaInfoFactoryImpl;
 import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
 import org.brijframework.model.info.OwnerModelInfo;
 import org.brijframework.support.config.Assignable;
+import org.brijframework.support.config.DepandOn;
 import org.brijframework.support.mapper.Mapper;
 import org.brijframework.support.mapper.Mappers;
 import org.brijframework.util.accessor.PropertyAccessorUtil;
@@ -17,6 +18,7 @@ import org.brijframework.util.reflect.FieldUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
+@DepandOn(depand=AnnotationClsMapperModelFactory.class)
 public class AnnotationPptMapperModelFactory extends MetaInfoFactoryImpl<PptMapperModel> implements MapperModelFactory {
 
 	protected AnnotationPptMapperModelFactory() {

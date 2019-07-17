@@ -52,6 +52,7 @@ public class AnnotationClsMapperModelFactory extends MetaInfoFactoryImpl<ClsMapp
 		PropertyAccessorUtil.setProperties(owner, properties);
 		owner.setId(target.getSimpleName());
 		owner.setTarget(target);
+		owner.setName(target.getSimpleName());
 		register(owner);
 		return owner;
 	}

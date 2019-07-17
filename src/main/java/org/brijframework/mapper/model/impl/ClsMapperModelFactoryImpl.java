@@ -27,13 +27,12 @@ public class ClsMapperModelFactoryImpl extends MetaInfoFactoryImpl<ClsMapperMode
 
 	public ClsMapperModel load(Class<?> target) {
 		ClsMapperModel model=getMetaInfo(target.getSimpleName());
-		if(model!=null) {
-			return model;
+		if(model==null) {
+			model = new ClsMapperModel();
+			model.setId(target.getSimpleName());
+			model.setTarget(target);
+			register(model);
 		}
-		ClsMapperModel owner = new ClsMapperModel();
-		owner.setId(target.getSimpleName());
-		owner.setTarget(target);
-		register(owner);
 		return model;
 	}
 
