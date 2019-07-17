@@ -6,15 +6,15 @@ import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.brijframework.mapper.Mapper;
+import org.brijframework.mapper.BeanMapper;
 import org.brijframework.mapper.model.ClsMapperModel;
-import org.brijframework.mapper.model.impl.AnnotationClsMapperModelFactory;
+import org.brijframework.mapper.model.impl.ClsMapperModelFactoryImpl;
 import org.brijframework.util.asserts.Assertion;
 import org.brijframework.util.reflect.FieldUtil;
 import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.Access;
 
-public class GenericMapper<E> implements Mapper<E> {
+public class GenericMapper<E> implements BeanMapper<E> {
 
 	public GenericMapper() {
 	}
@@ -49,6 +49,7 @@ public class GenericMapper<E> implements Mapper<E> {
 		Class<?> type=getGenericType(0);
 		Assertion.notNull(type, "Generic type not found.");
 		try {
+			ClsMapperModel model=ClsMapperModelFactoryImpl.getFactory().load(type);
 			@SuppressWarnings("unchecked")
 			E e=(E) InstanceUtil.getInstance(type);
 			for(Entry<String, Object> entry: properties.entrySet()) {
@@ -65,8 +66,7 @@ public class GenericMapper<E> implements Mapper<E> {
 		Class<?> type=getGenericType(0);
 		Assertion.notNull(type, "Generic type not found.");
 		try {
-			ClsMapperModel model=AnnotationClsMapperModelFactory.getFactory().getMetaInfo(type.getSimpleName());
-			Assertion.notNull(model, "Mapper not found.");
+			ClsMapperModel model=ClsMapperModelFactoryImpl.getFactory().load(type);
 			@SuppressWarnings("unchecked")
 			E e=(E) InstanceUtil.getInstance(type);
 			for(Field entry: FieldUtil.getAllField(properties.getClass(), Access.PRIVATE)) {

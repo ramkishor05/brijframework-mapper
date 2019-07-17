@@ -17,23 +17,23 @@ import org.brijframework.util.reflect.FieldUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
-public class AnnotationPptMapperModelFactory extends MetaInfoFactoryImpl<PptMapperModel> implements MapperModelFactory {
+public class PptMapperModelFactoryImpl extends MetaInfoFactoryImpl<PptMapperModel> implements MapperModelFactory {
 
-	protected AnnotationPptMapperModelFactory() {
+	protected PptMapperModelFactoryImpl() {
 	}
 
-	protected static AnnotationPptMapperModelFactory factory;
+	protected static PptMapperModelFactoryImpl factory;
 
 	@Assignable
-	public static AnnotationPptMapperModelFactory getFactory() {
+	public static PptMapperModelFactoryImpl getFactory() {
 		if (factory == null) {
-			factory = new AnnotationPptMapperModelFactory();
+			factory = new PptMapperModelFactoryImpl();
 		}
 		return factory;
 	}
 
 	@Override
-	public AnnotationPptMapperModelFactory loadFactory() {
+	public PptMapperModelFactoryImpl loadFactory() {
 		ReflectionUtils.getInternalClassList().forEach(target -> {
 			this.register(target);
 		});

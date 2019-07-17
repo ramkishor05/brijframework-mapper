@@ -1,6 +1,6 @@
 package org.brijframework.mapper;
 
-public interface Mapper<E> {
+public interface BeanMapper<E> {
 
 	E mapped(Object object);
 	
