@@ -28,16 +28,28 @@ public class MapperUtil {
 	
 	public static Object mappedToObjectFromObject(Object toObject,Object fromObject) {
 		BeanBuilder builder=new BeanBuilder(toObject);
-		for(Field entry: FieldUtil.getAllField(fromObject.getClass(), Access.PRIVATE)) {
-			PptMapperModel mapper=PptMapperModelFactoryImpl.getFactory().getMetaInfo(toObject.getClass().getSimpleName()+"_"+entry.getName());
-			Object value=PropertyAccessorUtil.getProperty(fromObject, entry, Access.PRIVATE);
-			if(mapper!=null) {
-				builder.setProperty(mapper.getName(), value);
+		for(Field fromField: FieldUtil.getAllField(fromObject.getClass(), Access.PRIVATE)) {
+			String keyPoint=getKeyPoint(toObject, fromField, fromObject);
+			Object value=PropertyAccessorUtil.getProperty(fromObject, fromField, Access.PRIVATE);
+			if(builder.containsKey(keyPoint)) {
+				builder.setProperty(keyPoint, value);
 			}else {
-				builder.setProperty(entry.getName(), value);
+				System.err.println(keyPoint+" not found in "+toObject.getClass().getName());
 			}
 		}
 		return builder.getCurrentInstance();
+	}
+	
+	public static String getKeyPoint(Object toObject,Field fromField,Object fromObject) {
+		PptMapperModel mapper=PptMapperModelFactoryImpl.getFactory().getMetaInfo(fromObject.getClass().getSimpleName()+"_"+fromField.getName());
+		if(mapper!=null) {
+			return mapper.getDestination();
+		}
+		 mapper=PptMapperModelFactoryImpl.getFactory().getMetaInfo(toObject.getClass().getSimpleName()+"_"+fromField.getName());
+		if(mapper!=null) {
+			return mapper.getName();
+		}
+		return fromField.getName();
 	}
 	
 	public static Object mappedToObjectFromMap(Object toObject,Map<String,Object> fromObject) {
