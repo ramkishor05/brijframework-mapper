@@ -1,4 +1,4 @@
-package org.brijframework.mapper.model.impl;
+package org.brijframework.mapper.factories.impl.annotation;
 
 import java.lang.reflect.Field;
 import java.util.Map;

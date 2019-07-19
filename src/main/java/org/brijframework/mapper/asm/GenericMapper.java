@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 import org.brijframework.mapper.BeanMapper;
-import org.brijframework.mapper.model.impl.MapperUtil;
+import org.brijframework.mapper.util.MapperUtil;
 import org.brijframework.util.asserts.Assertion;
 
 public class GenericMapper<E> implements BeanMapper<E> {

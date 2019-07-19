@@ -11,6 +11,8 @@ public class ClsMapperModel  extends AbstractModelInfo<Class<?>>  {
 
 	private String destination;
 	
+	private String type;
+	
 	private Class<?> target;
 	
 	private Map<String,PptMapperModel> properties;
@@ -49,5 +51,13 @@ public class ClsMapperModel  extends AbstractModelInfo<Class<?>>  {
 
 	public void setDestination(String destination) {
 		this.destination = destination;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getType() {
+		return type;
 	}
 }

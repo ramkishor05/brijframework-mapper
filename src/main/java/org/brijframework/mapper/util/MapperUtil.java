@@ -1,10 +1,11 @@
-package org.brijframework.mapper.model.impl;
+package org.brijframework.mapper.util;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.brijframework.bean.impl.BeanBuilder;
+import org.brijframework.mapper.factories.impl.PptMapperModelFactoryImpl;
 import org.brijframework.mapper.model.PptMapperModel;
 import org.brijframework.util.accessor.PropertyAccessorUtil;
 import org.brijframework.util.asserts.Assertion;

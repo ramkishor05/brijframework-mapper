@@ -1,4 +1,4 @@
-package org.brijframework.mapper.model.impl;
+package org.brijframework.mapper.factories.impl;
 
 import org.brijframework.mapper.factories.MapperModelFactory;
 import org.brijframework.mapper.model.PptMapperModel;
