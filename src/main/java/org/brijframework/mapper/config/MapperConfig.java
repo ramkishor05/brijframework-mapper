@@ -1,8 +1,8 @@
 package org.brijframework.mapper.config;
 
-import org.brijframework.bean.config.BeanConfig;
+import org.brijframework.model.config.ModelConfig;
 
-public class MapperConfig  implements BeanConfig{
+public class MapperConfig  implements ModelConfig{
 	
 	private boolean enable;
 	private String location;
