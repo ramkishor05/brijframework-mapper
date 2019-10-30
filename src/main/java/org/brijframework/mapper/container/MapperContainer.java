@@ -1,8 +1,8 @@
 package org.brijframework.mapper.container;
 
-import org.brijframework.asm.container.AbstractContainer;
+import org.brijframework.container.impl.AbstractContainer;
 import org.brijframework.group.Group;
-import org.brijframework.mapper.factories.MapperModelFactory;
+import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.model.container.ModelContainer;
 import org.brijframework.model.container.asm.MetaInfoContainer;
 import org.brijframework.model.group.MetaInfoGroup;
@@ -29,8 +29,8 @@ public class MapperContainer extends AbstractContainer implements ModelContainer
 	public void init() {
 		try {
 			ReflectionUtils.getClassListFromExternal().forEach(cls -> {
-				if (MapperModelFactory.class.isAssignableFrom(cls) && InstanceUtil.isAssignable(cls)) {
-					register((Class<? extends MapperModelFactory>) cls);
+				if (MapperFactory.class.isAssignableFrom(cls) && InstanceUtil.isAssignable(cls)) {
+					register((Class<? extends MapperFactory>) cls);
 				}
 			});
 		} catch (Exception e) {
@@ -38,8 +38,8 @@ public class MapperContainer extends AbstractContainer implements ModelContainer
 		}
 		try {
 			ReflectionUtils.getClassListFromInternal().forEach(cls -> {
-				if (MapperModelFactory.class.isAssignableFrom(cls) && InstanceUtil.isAssignable(cls)) {
-					register((Class<? extends MapperModelFactory>) cls);
+				if (MapperFactory.class.isAssignableFrom(cls) && InstanceUtil.isAssignable(cls)) {
+					register((Class<? extends MapperFactory>) cls);
 				}
 			});
 		} catch (Exception e) {

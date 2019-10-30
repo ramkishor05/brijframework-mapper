@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.brijframework.mapper.config.MapperConfig;
 import org.brijframework.mapper.constants.MapperConstants;
-import org.brijframework.mapper.factories.MapperModelFactory;
-import org.brijframework.mapper.model.ClsMapperModel;
-import org.brijframework.mapper.model.PptMapperModel;
+import org.brijframework.mapper.factories.MapperFactory;
+import org.brijframework.mapper.model.ComponentMapper;
+import org.brijframework.mapper.model.PropertyMapper;
 import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
 import org.brijframework.resources.factory.json.JsonResourceFactory;
 import org.brijframework.resources.files.json.JsonResource;
@@ -21,17 +21,17 @@ import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.Access;
 import org.json.JSONException;
 
-public class JsonClsMapperModelFactory extends MetaInfoFactoryImpl<ClsMapperModel> implements MapperModelFactory {
+public class JsonComponentMapperFactory extends MetaInfoFactoryImpl<ComponentMapper> implements MapperFactory {
 
-	protected JsonClsMapperModelFactory() {
+	protected JsonComponentMapperFactory() {
 	}
 
-	protected static JsonClsMapperModelFactory factory;
+	protected static JsonComponentMapperFactory factory;
 
 	@Assignable
-	public static JsonClsMapperModelFactory getFactory() {
+	public static JsonComponentMapperFactory getFactory() {
 		if (factory == null) {
-			factory = new JsonClsMapperModelFactory();
+			factory = new JsonComponentMapperFactory();
 		}
 		return factory;
 	}
@@ -39,12 +39,12 @@ public class JsonClsMapperModelFactory extends MetaInfoFactoryImpl<ClsMapperMode
 
 	@SuppressWarnings("unchecked")
 	public List<MapperConfig> configration() {
-		Object resources=getContainer().getContext().getProperties().get(MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_JSON_LOCATION);
+		Object resources=getContainer().getContext().getProperties().get(MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_LOCATION);
 		if (resources==null) {
-			System.err.println("Mapper configration not found :"+MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_JSON_LOCATION);
+			System.err.println("Mapper configration not found :"+MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_LOCATION);
 			return null;
 		}
-		System.err.println("Mapper configration found :"+MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_JSON_LOCATION);
+		System.err.println("Mapper configration found :"+MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_LOCATION);
 		if(resources instanceof List) {
 			return build((List<Map<String, Object>>)resources);
 		}else if(resources instanceof Map) {
@@ -71,7 +71,7 @@ public class JsonClsMapperModelFactory extends MetaInfoFactoryImpl<ClsMapperMode
 	
 	
 	@Override
-	public JsonClsMapperModelFactory loadFactory() {
+	public JsonComponentMapperFactory loadFactory() {
 		List<MapperConfig> configs=configration();
 		if(configs==null) {
 			System.err.println("Invalid mapper configration : "+configs);
@@ -116,13 +116,13 @@ public class JsonClsMapperModelFactory extends MetaInfoFactoryImpl<ClsMapperMode
 		Assertion.notNull(resourceMap, "Invalid target :"+resourceMap);
 		@SuppressWarnings("unchecked")
 		Map<String,Map<String,Object>> properties=(Map<String, Map<String, Object>>) resourceMap.remove("properties");
-		ClsMapperModel metaSetup=InstanceUtil.getInstance(ClsMapperModel.class,resourceMap);
+		ComponentMapper metaSetup=InstanceUtil.getInstance(ComponentMapper.class,resourceMap);
 		if(metaSetup.getType()!=null) {
 			metaSetup.setTarget(ClassUtil.getClass(metaSetup.getType()));
 		}
 		if(properties!=null) {
 			properties.forEach((key,property)->{
-				PptMapperModel pptMapperModel=getPropertyMapper(metaSetup.getTarget(),key,property);
+				PropertyMapper pptMapperModel=getPropertyMapper(metaSetup.getTarget(),key,property);
 				pptMapperModel.setId(key);
 				String destinationKey=metaSetup.getName()+"_"+pptMapperModel.getDestination();
 				String sourceKey=metaSetup.getName()+"_"+pptMapperModel.getSource();
@@ -143,8 +143,8 @@ public class JsonClsMapperModelFactory extends MetaInfoFactoryImpl<ClsMapperMode
 	}
 
 
-	private PptMapperModel getPropertyMapper(Class<?> type,String _field, Map<String, Object> property) {
-		PptMapperModel pptMapperModel=InstanceUtil.getInstance(PptMapperModel.class,property);
+	private PropertyMapper getPropertyMapper(Class<?> type,String _field, Map<String, Object> property) {
+		PropertyMapper pptMapperModel=InstanceUtil.getInstance(PropertyMapper.class,property);
 		if(type!=null) {
 		  pptMapperModel.setTarget(FieldUtil.getField(type, _field, Access.PRIVATE));
 		}

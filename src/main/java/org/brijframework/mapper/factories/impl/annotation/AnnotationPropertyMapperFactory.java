@@ -1,10 +1,10 @@
-package org.brijframework.mapper.model.impl.json;
+package org.brijframework.mapper.factories.impl.annotation;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import org.brijframework.mapper.factories.MapperModelFactory;
-import org.brijframework.mapper.model.PptMapperModel;
+import org.brijframework.mapper.factories.MapperFactory;
+import org.brijframework.mapper.model.PropertyMapper;
 import org.brijframework.model.factories.asm.ClassMetaInfoFactoryImpl;
 import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
 import org.brijframework.model.info.OwnerModelInfo;
@@ -18,24 +18,24 @@ import org.brijframework.util.reflect.FieldUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
-@DepandOn(depand=JsonClsMapperModelFactory.class)
-public class JsonPptMapperModelFactory extends MetaInfoFactoryImpl<PptMapperModel> implements MapperModelFactory {
+@DepandOn(depand=AnnotationComponentMapperFactory.class)
+public class AnnotationPropertyMapperFactory extends MetaInfoFactoryImpl<PropertyMapper> implements MapperFactory {
 
-	protected JsonPptMapperModelFactory() {
+	protected AnnotationPropertyMapperFactory() {
 	}
 
-	protected static JsonPptMapperModelFactory factory;
+	protected static AnnotationPropertyMapperFactory factory;
 
 	@Assignable
-	public static JsonPptMapperModelFactory getFactory() {
+	public static AnnotationPropertyMapperFactory getFactory() {
 		if (factory == null) {
-			factory = new JsonPptMapperModelFactory();
+			factory = new AnnotationPropertyMapperFactory();
 		}
 		return factory;
 	}
 
 	@Override
-	public JsonPptMapperModelFactory loadFactory() {
+	public AnnotationPropertyMapperFactory loadFactory() {
 		ReflectionUtils.getInternalClassList().forEach(target -> {
 			this.register(target);
 		});
@@ -55,9 +55,9 @@ public class JsonPptMapperModelFactory extends MetaInfoFactoryImpl<PptMapperMode
 		}
 	}
 
-	public PptMapperModel register(Class<?> target, Field field, Mapper mapper) {
+	public PropertyMapper register(Class<?> target, Field field, Mapper mapper) {
 		Map<String, Object> properties = AnnotationUtil.getAnnotationData(mapper);
-		PptMapperModel modelMap = new PptMapperModel();
+		PropertyMapper modelMap = new PropertyMapper();
 		PropertyAccessorUtil.setProperties(modelMap, properties);
 		modelMap.setId(target.getSimpleName() + "_" + mapper.source());
 		OwnerModelInfo owner = ClassMetaInfoFactoryImpl.getFactory().load(target);

@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 import org.brijframework.model.info.asm.AbstractModelInfo;
 
-public class PptMapperModel extends AbstractModelInfo<Field> {
+public class PropertyMapper extends AbstractModelInfo<Field> {
 
 	private String source;
 

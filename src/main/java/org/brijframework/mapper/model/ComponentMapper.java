@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.brijframework.model.info.asm.AbstractModelInfo;
 
-public class ClsMapperModel  extends AbstractModelInfo<Class<?>>  {
+public class ComponentMapper  extends AbstractModelInfo<Class<?>>  {
 
 	private String source;
 
@@ -15,16 +15,16 @@ public class ClsMapperModel  extends AbstractModelInfo<Class<?>>  {
 	
 	private Class<?> target;
 	
-	private Map<String,PptMapperModel> properties;
+	private Map<String,PropertyMapper> properties;
 	
-	public Map<String, PptMapperModel> getProperties() {
+	public Map<String, PropertyMapper> getProperties() {
 		if(properties==null) {
-			properties=new HashMap<String, PptMapperModel>();
+			properties=new HashMap<String, PropertyMapper>();
 		}
 		return properties;
 	}
 	
-	public void setProperties(Map<String, PptMapperModel> properties) {
+	public void setProperties(Map<String, PropertyMapper> properties) {
 		this.properties = properties;
 	}
 	
