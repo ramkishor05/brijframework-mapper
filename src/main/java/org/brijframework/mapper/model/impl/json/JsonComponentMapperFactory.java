@@ -39,7 +39,7 @@ public class JsonComponentMapperFactory extends MetaInfoFactoryImpl<ComponentMap
 
 	@SuppressWarnings("unchecked")
 	public List<MapperConfig> configration() {
-		Object resources=getContainer().getContext().getProperties().get(MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_LOCATION);
+		Object resources=getContainer().getContext().getEnvironment().get(MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_LOCATION);
 		if (resources==null) {
 			System.err.println("Mapper configration not found :"+MapperConstants.APPLICATION_BOOTSTRAP_CONFIG_MAPPER_LOCATION);
 			return null;
