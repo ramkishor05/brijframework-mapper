@@ -1,18 +1,17 @@
 package org.brijframework.mapper.container;
 
-import org.brijframework.container.impl.AbstractContainer;
+import org.brijframework.container.impl.AbstractModuleContainer;
 import org.brijframework.group.Group;
 import org.brijframework.mapper.factories.MapperFactory;
-import org.brijframework.model.container.ModelContainer;
-import org.brijframework.model.container.asm.MetaInfoContainer;
+import org.brijframework.model.container.asm.MetaDataContainer;
 import org.brijframework.model.group.MetaInfoGroup;
 import org.brijframework.support.config.Assignable;
 import org.brijframework.support.config.DepandOn;
 import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 
-@DepandOn(depand=MetaInfoContainer.class)
-public class MapperContainer extends AbstractContainer implements ModelContainer{
+@DepandOn(depand=MetaDataContainer.class)
+public class MapperContainer extends AbstractModuleContainer{
 
 	private static MapperContainer container;
 
