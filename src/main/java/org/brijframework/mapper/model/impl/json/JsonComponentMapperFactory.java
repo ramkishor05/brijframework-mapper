@@ -21,7 +21,7 @@ import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.Access;
 import org.json.JSONException;
 
-public class JsonComponentMapperFactory extends MetaInfoFactoryImpl<ComponentMapper> implements MapperFactory {
+public class JsonComponentMapperFactory extends MetaInfoFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected JsonComponentMapperFactory() {
 	}
@@ -149,5 +149,19 @@ public class JsonComponentMapperFactory extends MetaInfoFactoryImpl<ComponentMap
 		  pptMapperModel.setTarget(FieldUtil.getField(type, _field, Access.PRIVATE));
 		}
 		return pptMapperModel;
+	}
+
+
+	@Override
+	protected void preregister(String key, ComponentMapper value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected void postregister(String key, ComponentMapper value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

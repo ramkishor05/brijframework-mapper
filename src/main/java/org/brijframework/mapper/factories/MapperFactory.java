@@ -1,7 +1,7 @@
 package org.brijframework.mapper.factories;
 
-import org.brijframework.factories.Factory;
+import org.brijframework.factories.module.ModuleFactory;
 
-public interface MapperFactory extends Factory{
+public interface MapperFactory<K,T> extends ModuleFactory<K,T>{
 
 }

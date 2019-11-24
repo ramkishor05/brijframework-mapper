@@ -19,7 +19,7 @@ import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
 @DepandOn(depand=AnnotationComponentMapperFactory.class)
-public class AnnotationPropertyMapperFactory extends MetaInfoFactoryImpl<PropertyMapper> implements MapperFactory {
+public class AnnotationPropertyMapperFactory extends MetaInfoFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected AnnotationPropertyMapperFactory() {
 	}
@@ -66,5 +66,17 @@ public class AnnotationPropertyMapperFactory extends MetaInfoFactoryImpl<Propert
 		modelMap.setTarget(field);
 		register(modelMap);
 		return modelMap;
+	}
+
+	@Override
+	protected void preregister(String key, PropertyMapper value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void postregister(String key, PropertyMapper value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

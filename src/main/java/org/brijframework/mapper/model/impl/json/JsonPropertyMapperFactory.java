@@ -19,7 +19,7 @@ import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
 @DepandOn(depand=JsonComponentMapperFactory.class)
-public class JsonPropertyMapperFactory extends MetaInfoFactoryImpl<PropertyMapper> implements MapperFactory {
+public class JsonPropertyMapperFactory extends MetaInfoFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected JsonPropertyMapperFactory() {
 	}
@@ -66,5 +66,17 @@ public class JsonPropertyMapperFactory extends MetaInfoFactoryImpl<PropertyMappe
 		modelMap.setTarget(field);
 		register(modelMap);
 		return modelMap;
+	}
+
+	@Override
+	protected void preregister(String key, PropertyMapper value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void postregister(String key, PropertyMapper value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

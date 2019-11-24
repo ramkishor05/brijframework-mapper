@@ -12,7 +12,7 @@ import org.brijframework.util.accessor.PropertyAccessorUtil;
 import org.brijframework.util.reflect.AnnotationUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 
-public class AnnotationComponentMapperFactory extends MetaInfoFactoryImpl<ComponentMapper> implements MapperFactory {
+public class AnnotationComponentMapperFactory extends MetaInfoFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected AnnotationComponentMapperFactory() {
 	}
@@ -55,5 +55,17 @@ public class AnnotationComponentMapperFactory extends MetaInfoFactoryImpl<Compon
 		owner.setName(target.getSimpleName());
 		register(owner);
 		return owner;
+	}
+
+	@Override
+	protected void preregister(String key, ComponentMapper value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void postregister(String key, ComponentMapper value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

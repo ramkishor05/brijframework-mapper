@@ -5,7 +5,7 @@ import org.brijframework.mapper.model.ComponentMapper;
 import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
 import org.brijframework.support.config.Assignable;
 
-public class ComponentMapperImpl extends MetaInfoFactoryImpl<ComponentMapper> implements MapperFactory {
+public class ComponentMapperImpl extends MetaInfoFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected ComponentMapperImpl() {
 	}
@@ -34,6 +34,18 @@ public class ComponentMapperImpl extends MetaInfoFactoryImpl<ComponentMapper> im
 			register(model);
 		}
 		return model;
+	}
+
+	@Override
+	protected void preregister(String key, ComponentMapper value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void postregister(String key, ComponentMapper value) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

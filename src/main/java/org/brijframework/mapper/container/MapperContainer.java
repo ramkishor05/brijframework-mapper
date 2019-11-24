@@ -1,6 +1,6 @@
 package org.brijframework.mapper.container;
 
-import org.brijframework.container.impl.AbstractModuleContainer;
+import org.brijframework.container.impl.module.AbstractModuleContainer;
 import org.brijframework.group.Group;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.model.container.asm.MetaDataContainer;
@@ -29,7 +29,7 @@ public class MapperContainer extends AbstractModuleContainer{
 		try {
 			ReflectionUtils.getClassListFromExternal().forEach(cls -> {
 				if (MapperFactory.class.isAssignableFrom(cls) && InstanceUtil.isAssignable(cls)) {
-					register((Class<? extends MapperFactory>) cls);
+					register((Class<? extends MapperFactory<?,?>>) cls);
 				}
 			});
 		} catch (Exception e) {
@@ -38,7 +38,7 @@ public class MapperContainer extends AbstractModuleContainer{
 		try {
 			ReflectionUtils.getClassListFromInternal().forEach(cls -> {
 				if (MapperFactory.class.isAssignableFrom(cls) && InstanceUtil.isAssignable(cls)) {
-					register((Class<? extends MapperFactory>) cls);
+					register((Class<? extends MapperFactory<?,?>>) cls);
 				}
 			});
 		} catch (Exception e) {

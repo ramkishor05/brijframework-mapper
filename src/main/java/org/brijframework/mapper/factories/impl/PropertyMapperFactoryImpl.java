@@ -5,7 +5,7 @@ import org.brijframework.mapper.model.PropertyMapper;
 import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
 import org.brijframework.support.config.Assignable;
 
-public class PropertyMapperFactoryImpl extends MetaInfoFactoryImpl<PropertyMapper> implements MapperFactory {
+public class PropertyMapperFactoryImpl extends MetaInfoFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected PropertyMapperFactoryImpl() {
 	}
@@ -27,6 +27,18 @@ public class PropertyMapperFactoryImpl extends MetaInfoFactoryImpl<PropertyMappe
 
 	public PropertyMapper getMetaInfo(String id) {
 		return null;
+	}
+
+	@Override
+	protected void preregister(String key, PropertyMapper value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void postregister(String key, PropertyMapper value) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
