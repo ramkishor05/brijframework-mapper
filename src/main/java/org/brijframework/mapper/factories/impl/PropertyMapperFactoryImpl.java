@@ -2,10 +2,10 @@ package org.brijframework.mapper.factories.impl;
 
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
+import org.brijframework.model.factories.metadata.asm.ModelMetaDataFactoryImpl;
 import org.brijframework.support.config.Assignable;
 
-public class PropertyMapperFactoryImpl extends MetaInfoFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
+public class PropertyMapperFactoryImpl extends ModelMetaDataFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected PropertyMapperFactoryImpl() {
 	}

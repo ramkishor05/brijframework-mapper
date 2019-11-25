@@ -3,9 +3,9 @@ package org.brijframework.mapper.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.brijframework.model.info.asm.AbstractModelInfo;
+import org.brijframework.model.info.asm.AbstractModelMetaData;
 
-public class ComponentMapper  extends AbstractModelInfo<Class<?>>  {
+public class ComponentMapper  extends AbstractModelMetaData<Class<?>>  {
 
 	private String source;
 

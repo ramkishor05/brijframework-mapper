@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.asm.ClassMetaInfoFactoryImpl;
-import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
-import org.brijframework.model.info.OwnerModelInfo;
+import org.brijframework.model.factories.metadata.asm.ModelMetaDataFactoryImpl;
+import org.brijframework.model.factories.metadata.asm.impl.ClassModelMetaDataFactoryImpl;
+import org.brijframework.model.info.ClassModelMetaData;
 import org.brijframework.support.config.Assignable;
 import org.brijframework.support.config.DepandOn;
 import org.brijframework.support.mapper.Mapper;
@@ -19,7 +19,7 @@ import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
 @DepandOn(depand=JsonComponentMapperFactory.class)
-public class JsonPropertyMapperFactory extends MetaInfoFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
+public class JsonPropertyMapperFactory extends ModelMetaDataFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected JsonPropertyMapperFactory() {
 	}
@@ -60,7 +60,7 @@ public class JsonPropertyMapperFactory extends MetaInfoFactoryImpl<String,Proper
 		PropertyMapper modelMap = new PropertyMapper();
 		PropertyAccessorUtil.setProperties(modelMap, properties);
 		modelMap.setId(target.getSimpleName() + "_" + mapper.source());
-		OwnerModelInfo owner = ClassMetaInfoFactoryImpl.getFactory().load(target);
+		ClassModelMetaData owner = ClassModelMetaDataFactoryImpl.getFactory().load(target);
 		modelMap.setName(field.getName());
 		modelMap.setOwner(owner);
 		modelMap.setTarget(field);

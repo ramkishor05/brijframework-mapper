@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.ComponentMapper;
-import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
+import org.brijframework.model.factories.metadata.asm.ModelMetaDataFactoryImpl;
 import org.brijframework.support.config.Assignable;
 import org.brijframework.support.mapper.Mapper;
 import org.brijframework.support.mapper.Mappers;
@@ -12,7 +12,7 @@ import org.brijframework.util.accessor.PropertyAccessorUtil;
 import org.brijframework.util.reflect.AnnotationUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 
-public class AnnotationComponentMapperFactory extends MetaInfoFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class AnnotationComponentMapperFactory extends ModelMetaDataFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected AnnotationComponentMapperFactory() {
 	}

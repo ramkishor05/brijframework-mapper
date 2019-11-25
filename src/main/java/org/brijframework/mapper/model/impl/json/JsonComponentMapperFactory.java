@@ -10,7 +10,7 @@ import org.brijframework.mapper.constants.MapperConstants;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.ComponentMapper;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.asm.MetaInfoFactoryImpl;
+import org.brijframework.model.factories.metadata.asm.ModelMetaDataFactoryImpl;
 import org.brijframework.resources.factory.json.JsonResourceFactory;
 import org.brijframework.resources.files.json.JsonResource;
 import org.brijframework.support.config.Assignable;
@@ -21,7 +21,7 @@ import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.Access;
 import org.json.JSONException;
 
-public class JsonComponentMapperFactory extends MetaInfoFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class JsonComponentMapperFactory extends ModelMetaDataFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected JsonComponentMapperFactory() {
 	}
