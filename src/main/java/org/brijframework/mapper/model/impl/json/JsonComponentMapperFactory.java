@@ -10,10 +10,10 @@ import org.brijframework.mapper.constants.MapperConstants;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.ComponentMapper;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.metadata.asm.ModelMetaDataFactoryImpl;
+import org.brijframework.model.factories.metadata.asm.AbstractModelMetaDataFactory;
 import org.brijframework.resources.factory.json.JsonResourceFactory;
 import org.brijframework.resources.files.json.JsonResource;
-import org.brijframework.support.config.Assignable;
+import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.util.asserts.Assertion;
 import org.brijframework.util.reflect.ClassUtil;
 import org.brijframework.util.reflect.FieldUtil;
@@ -21,14 +21,14 @@ import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.Access;
 import org.json.JSONException;
 
-public class JsonComponentMapperFactory extends ModelMetaDataFactoryImpl<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class JsonComponentMapperFactory extends AbstractModelMetaDataFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected JsonComponentMapperFactory() {
 	}
 
 	protected static JsonComponentMapperFactory factory;
 
-	@Assignable
+	@SingletonFactory
 	public static JsonComponentMapperFactory getFactory() {
 		if (factory == null) {
 			factory = new JsonComponentMapperFactory();

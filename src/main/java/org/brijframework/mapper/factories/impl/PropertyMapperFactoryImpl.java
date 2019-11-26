@@ -2,17 +2,17 @@ package org.brijframework.mapper.factories.impl;
 
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.metadata.asm.ModelMetaDataFactoryImpl;
-import org.brijframework.support.config.Assignable;
+import org.brijframework.model.factories.metadata.asm.AbstractModelMetaDataFactory;
+import org.brijframework.support.config.SingletonFactory;
 
-public class PropertyMapperFactoryImpl extends ModelMetaDataFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
+public class PropertyMapperFactoryImpl extends AbstractModelMetaDataFactory<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected PropertyMapperFactoryImpl() {
 	}
 
 	protected static PropertyMapperFactoryImpl factory;
 
-	@Assignable
+	@SingletonFactory
 	public static PropertyMapperFactoryImpl getFactory() {
 		if (factory == null) {
 			factory = new PropertyMapperFactoryImpl();

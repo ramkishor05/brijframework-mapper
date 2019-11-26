@@ -5,10 +5,10 @@ import java.util.Map;
 
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.metadata.asm.ModelMetaDataFactoryImpl;
+import org.brijframework.model.factories.metadata.asm.AbstractModelMetaDataFactory;
 import org.brijframework.model.factories.metadata.asm.impl.ClassModelMetaDataFactoryImpl;
 import org.brijframework.model.info.ClassModelMetaData;
-import org.brijframework.support.config.Assignable;
+import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.support.config.DepandOn;
 import org.brijframework.support.mapper.Mapper;
 import org.brijframework.support.mapper.Mappers;
@@ -19,14 +19,14 @@ import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
 @DepandOn(depand=JsonComponentMapperFactory.class)
-public class JsonPropertyMapperFactory extends ModelMetaDataFactoryImpl<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
+public class JsonPropertyMapperFactory extends AbstractModelMetaDataFactory<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected JsonPropertyMapperFactory() {
 	}
 
 	protected static JsonPropertyMapperFactory factory;
 
-	@Assignable
+	@SingletonFactory
 	public static JsonPropertyMapperFactory getFactory() {
 		if (factory == null) {
 			factory = new JsonPropertyMapperFactory();

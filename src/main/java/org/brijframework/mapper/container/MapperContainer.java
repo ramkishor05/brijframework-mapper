@@ -3,19 +3,19 @@ package org.brijframework.mapper.container;
 import org.brijframework.container.impl.module.AbstractModuleContainer;
 import org.brijframework.group.Group;
 import org.brijframework.mapper.factories.MapperFactory;
-import org.brijframework.model.container.asm.MetaDataContainer;
+import org.brijframework.model.container.asm.ModelMetaDataContainer;
 import org.brijframework.model.group.MetaInfoGroup;
-import org.brijframework.support.config.Assignable;
+import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.support.config.DepandOn;
 import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 
-@DepandOn(depand=MetaDataContainer.class)
+@DepandOn(depand=ModelMetaDataContainer.class)
 public class MapperContainer extends AbstractModuleContainer{
 
 	private static MapperContainer container;
 
-	@Assignable
+	@SingletonFactory
 	public static MapperContainer getContainer() {
 		if (container == null) {
 			container = InstanceUtil.getSingletonInstance(MapperContainer.class);
