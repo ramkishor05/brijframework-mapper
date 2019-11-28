@@ -41,4 +41,10 @@ public class PropertyMapperFactoryImpl extends AbstractModelMetaDataFactory<Stri
 		
 	}
 
+	@Override
+	protected void loadContainer(String key, PropertyMapper value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

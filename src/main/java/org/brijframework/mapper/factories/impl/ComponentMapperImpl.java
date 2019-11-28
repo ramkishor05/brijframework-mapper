@@ -48,4 +48,9 @@ public class ComponentMapperImpl extends AbstractModelMetaDataFactory<String,Com
 		
 	}
 
+	@Override
+	protected void loadContainer(String key, ComponentMapper value) {
+		
+	}
+
 }
