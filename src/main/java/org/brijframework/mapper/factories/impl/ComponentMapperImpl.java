@@ -1,11 +1,11 @@
 package org.brijframework.mapper.factories.impl;
 
+import org.brijframework.factories.impl.module.AbstractModuleFactory;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.ComponentMapper;
-import org.brijframework.model.factories.metadata.asm.AbstractModelMetaDataFactory;
 import org.brijframework.support.config.SingletonFactory;
 
-public class ComponentMapperImpl extends AbstractModelMetaDataFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class ComponentMapperImpl extends AbstractModuleFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected ComponentMapperImpl() {
 	}
@@ -26,31 +26,22 @@ public class ComponentMapperImpl extends AbstractModelMetaDataFactory<String,Com
 	}
 
 	public ComponentMapper load(Class<?> target) {
-		ComponentMapper model=getMetaInfo(target.getSimpleName());
+		ComponentMapper model=find(target.getSimpleName());
 		if(model==null) {
 			model = new ComponentMapper();
 			model.setId(target.getSimpleName());
-			model.setTarget(target);
-			register(model);
+			model.setType(target);
+			register(target.getSimpleName(),model);
 		}
 		return model;
 	}
 
 	@Override
 	protected void preregister(String key, ComponentMapper value) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	protected void postregister(String key, ComponentMapper value) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void loadContainer(String key, ComponentMapper value) {
-		
 	}
 
 }

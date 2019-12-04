@@ -3,13 +3,13 @@ package org.brijframework.mapper.model.impl.json;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+import org.brijframework.factories.impl.module.AbstractModuleFactory;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.metadata.asm.AbstractModelMetaDataFactory;
-import org.brijframework.model.factories.metadata.asm.impl.ClassModelMetaDataFactoryImpl;
-import org.brijframework.model.info.ClassModelMetaData;
-import org.brijframework.support.config.SingletonFactory;
+import org.brijframework.model.factories.metadata.impl.TypeModelMetaDataFactoryImpl;
+import org.brijframework.model.metadata.TypeModelMetaData;
 import org.brijframework.support.config.DepandOn;
+import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.support.mapper.Mapper;
 import org.brijframework.support.mapper.Mappers;
 import org.brijframework.util.accessor.PropertyAccessorUtil;
@@ -19,7 +19,7 @@ import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
 @DepandOn(depand=JsonComponentMapperFactory.class)
-public class JsonPropertyMapperFactory extends AbstractModelMetaDataFactory<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
+public class JsonPropertyMapperFactory extends AbstractModuleFactory<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
 
 	protected JsonPropertyMapperFactory() {
 	}
@@ -60,11 +60,11 @@ public class JsonPropertyMapperFactory extends AbstractModelMetaDataFactory<Stri
 		PropertyMapper modelMap = new PropertyMapper();
 		PropertyAccessorUtil.setProperties(modelMap, properties);
 		modelMap.setId(target.getSimpleName() + "_" + mapper.source());
-		ClassModelMetaData owner = ClassModelMetaDataFactoryImpl.getFactory().load(target);
+		TypeModelMetaData owner = TypeModelMetaDataFactoryImpl.getFactory().load(target);
 		modelMap.setName(field.getName());
 		modelMap.setOwner(owner);
 		modelMap.setTarget(field);
-		register(modelMap);
+		register(modelMap.getId(), modelMap);
 		return modelMap;
 	}
 

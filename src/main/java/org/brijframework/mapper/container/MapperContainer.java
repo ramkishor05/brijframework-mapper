@@ -4,7 +4,7 @@ import org.brijframework.container.impl.module.AbstractModuleContainer;
 import org.brijframework.group.Group;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.model.container.asm.ModelMetaDataContainer;
-import org.brijframework.model.group.MetaInfoGroup;
+import org.brijframework.model.group.ModelMetaDataGroup;
 import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.support.config.DepandOn;
 import org.brijframework.util.reflect.InstanceUtil;
@@ -50,7 +50,7 @@ public class MapperContainer extends AbstractModuleContainer{
 	public Group load(Object groupKey) {
 		Group group=get(groupKey);
 		if(group==null) {
-			group = new MetaInfoGroup(groupKey);
+			group = new ModelMetaDataGroup(groupKey);
 			getCache().put(groupKey, group);
 		}
 		return group;

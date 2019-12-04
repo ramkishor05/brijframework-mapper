@@ -2,9 +2,9 @@ package org.brijframework.mapper.factories.impl.annotation;
 
 import java.util.Map;
 
+import org.brijframework.factories.impl.module.AbstractModuleFactory;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.ComponentMapper;
-import org.brijframework.model.factories.metadata.asm.AbstractModelMetaDataFactory;
 import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.support.mapper.Mapper;
 import org.brijframework.support.mapper.Mappers;
@@ -12,7 +12,7 @@ import org.brijframework.util.accessor.PropertyAccessorUtil;
 import org.brijframework.util.reflect.AnnotationUtil;
 import org.brijframework.util.reflect.ReflectionUtils;
 
-public class AnnotationComponentMapperFactory extends AbstractModelMetaDataFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class AnnotationComponentMapperFactory extends AbstractModuleFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected AnnotationComponentMapperFactory() {
 	}
@@ -51,9 +51,9 @@ public class AnnotationComponentMapperFactory extends AbstractModelMetaDataFacto
 		ComponentMapper owner = new ComponentMapper();
 		PropertyAccessorUtil.setProperties(owner, properties);
 		owner.setId(target.getSimpleName());
-		owner.setTarget(target);
+		owner.setType(target);
 		owner.setName(target.getSimpleName());
-		register(owner);
+		register(owner.getId(),owner);
 		return owner;
 	}
 

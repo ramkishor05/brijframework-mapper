@@ -2,8 +2,8 @@ package org.brijframework.mapper.model;
 
 import java.lang.reflect.Field;
 
-import org.brijframework.model.info.ClassModelMetaData;
-import org.brijframework.model.info.asm.AbstractModelMetaData;
+import org.brijframework.model.metadata.TypeModelMetaData;
+import org.brijframework.model.metadata.asm.AbstractModelMetaData;
 
 public class PropertyMapper extends AbstractModelMetaData<Field> {
 
@@ -13,10 +13,10 @@ public class PropertyMapper extends AbstractModelMetaData<Field> {
 
 	private Field target;
 
-	ClassModelMetaData owner;
+	TypeModelMetaData owner;
 
 	@Override
-	public Field getTarget() {
+	public Field getType() {
 		return target;
 	}
 
@@ -40,11 +40,11 @@ public class PropertyMapper extends AbstractModelMetaData<Field> {
 		this.destination = destination;
 	}
 
-	public void setOwner(ClassModelMetaData owner) {
+	public void setOwner(TypeModelMetaData owner) {
 		this.owner = owner;
 	}
 	
-	public ClassModelMetaData getOwner() {
+	public TypeModelMetaData getOwner() {
 		return owner;
 	}
 

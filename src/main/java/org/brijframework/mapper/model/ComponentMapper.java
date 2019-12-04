@@ -3,17 +3,15 @@ package org.brijframework.mapper.model;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.brijframework.model.info.asm.AbstractModelMetaData;
+import org.brijframework.model.resource.asm.AbstractModelResource;
 
-public class ComponentMapper  extends AbstractModelMetaData<Class<?>>  {
+public class ComponentMapper  extends AbstractModelResource<Class<?>>  {
 
 	private String source;
 
 	private String destination;
 	
-	private String type;
-	
-	private Class<?> target;
+	private Class<?> type;
 	
 	private Map<String,PropertyMapper> properties;
 	
@@ -29,12 +27,12 @@ public class ComponentMapper  extends AbstractModelMetaData<Class<?>>  {
 	}
 	
 	@Override
-	public Class<?> getTarget() {
-		return target;
+	public Class<?> getType() {
+		return type;
 	}
 
-	public void setTarget(Class<?> target) {
-		this.target = target;
+	public void setType(Class<?> type) {
+		this.type = type;
 	}
 
 	public String getSource() {
@@ -53,11 +51,4 @@ public class ComponentMapper  extends AbstractModelMetaData<Class<?>>  {
 		this.destination = destination;
 	}
 	
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	public String getType() {
-		return type;
-	}
 }

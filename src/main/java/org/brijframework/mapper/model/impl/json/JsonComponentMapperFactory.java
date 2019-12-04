@@ -5,23 +5,22 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.brijframework.factories.impl.module.AbstractModuleFactory;
 import org.brijframework.mapper.config.MapperConfig;
 import org.brijframework.mapper.constants.MapperConstants;
 import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.mapper.model.ComponentMapper;
 import org.brijframework.mapper.model.PropertyMapper;
-import org.brijframework.model.factories.metadata.asm.AbstractModelMetaDataFactory;
 import org.brijframework.resources.factory.json.JsonResourceFactory;
 import org.brijframework.resources.files.json.JsonResource;
 import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.util.asserts.Assertion;
-import org.brijframework.util.reflect.ClassUtil;
 import org.brijframework.util.reflect.FieldUtil;
 import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.Access;
 import org.json.JSONException;
 
-public class JsonComponentMapperFactory extends AbstractModelMetaDataFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class JsonComponentMapperFactory extends AbstractModuleFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
 
 	protected JsonComponentMapperFactory() {
 	}
@@ -117,12 +116,9 @@ public class JsonComponentMapperFactory extends AbstractModelMetaDataFactory<Str
 		@SuppressWarnings("unchecked")
 		Map<String,Map<String,Object>> properties=(Map<String, Map<String, Object>>) resourceMap.remove("properties");
 		ComponentMapper metaSetup=InstanceUtil.getInstance(ComponentMapper.class,resourceMap);
-		if(metaSetup.getType()!=null) {
-			metaSetup.setTarget(ClassUtil.getClass(metaSetup.getType()));
-		}
 		if(properties!=null) {
 			properties.forEach((key,property)->{
-				PropertyMapper pptMapperModel=getPropertyMapper(metaSetup.getTarget(),key,property);
+				PropertyMapper pptMapperModel=getPropertyMapper(metaSetup.getType(),key,property);
 				pptMapperModel.setId(key);
 				String destinationKey=metaSetup.getName()+"_"+pptMapperModel.getDestination();
 				String sourceKey=metaSetup.getName()+"_"+pptMapperModel.getSource();
@@ -139,7 +135,7 @@ public class JsonComponentMapperFactory extends AbstractModelMetaDataFactory<Str
 				}
 			});
 		}
-		this.register(metaSetup);
+		this.register(metaSetup.getId(),metaSetup);
 	}
 
 
@@ -154,14 +150,10 @@ public class JsonComponentMapperFactory extends AbstractModelMetaDataFactory<Str
 
 	@Override
 	protected void preregister(String key, ComponentMapper value) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
 	@Override
 	protected void postregister(String key, ComponentMapper value) {
-		// TODO Auto-generated method stub
-		
 	}
 }
