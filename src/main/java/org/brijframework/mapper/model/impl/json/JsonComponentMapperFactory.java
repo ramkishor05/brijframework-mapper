@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.brijframework.factories.impl.module.AbstractModuleFactory;
-import org.brijframework.mapper.config.MapperConfig;
-import org.brijframework.mapper.constants.MapperConstants;
-import org.brijframework.mapper.factories.MapperFactory;
-import org.brijframework.mapper.model.ComponentMapper;
-import org.brijframework.mapper.model.PropertyMapper;
+import org.brijframework.model.mapper.config.MapperConfig;
+import org.brijframework.model.mapper.constants.MapperConstants;
+import org.brijframework.model.mapper.factories.MapperFactory;
+import org.brijframework.model.mapper.model.PropertyModelMapperResource;
+import org.brijframework.model.mapper.model.TypeModelMapperResource;
+import org.brijframework.model.mapper.model.impl.json.JsonComponentMapperFactory;
 import org.brijframework.resources.factory.json.JsonResourceFactory;
 import org.brijframework.resources.files.json.JsonResource;
 import org.brijframework.support.config.SingletonFactory;
@@ -20,7 +21,7 @@ import org.brijframework.util.reflect.InstanceUtil;
 import org.brijframework.util.support.Access;
 import org.json.JSONException;
 
-public class JsonComponentMapperFactory extends AbstractModuleFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class JsonComponentMapperFactory extends AbstractModuleFactory<String,TypeModelMapperResource> implements MapperFactory<String,TypeModelMapperResource> {
 
 	protected JsonComponentMapperFactory() {
 	}
@@ -115,10 +116,10 @@ public class JsonComponentMapperFactory extends AbstractModuleFactory<String,Com
 		Assertion.notNull(resourceMap, "Invalid target :"+resourceMap);
 		@SuppressWarnings("unchecked")
 		Map<String,Map<String,Object>> properties=(Map<String, Map<String, Object>>) resourceMap.remove("properties");
-		ComponentMapper metaSetup=InstanceUtil.getInstance(ComponentMapper.class,resourceMap);
+		TypeModelMapperResource metaSetup=InstanceUtil.getInstance(TypeModelMapperResource.class,resourceMap);
 		if(properties!=null) {
 			properties.forEach((key,property)->{
-				PropertyMapper pptMapperModel=getPropertyMapper(metaSetup.getType(),key,property);
+				PropertyModelMapperResource pptMapperModel=getPropertyMapper(metaSetup.getType(),key,property);
 				pptMapperModel.setId(key);
 				String destinationKey=metaSetup.getName()+"_"+pptMapperModel.getDestination();
 				String sourceKey=metaSetup.getName()+"_"+pptMapperModel.getSource();
@@ -139,8 +140,8 @@ public class JsonComponentMapperFactory extends AbstractModuleFactory<String,Com
 	}
 
 
-	private PropertyMapper getPropertyMapper(Class<?> type,String _field, Map<String, Object> property) {
-		PropertyMapper pptMapperModel=InstanceUtil.getInstance(PropertyMapper.class,property);
+	private PropertyModelMapperResource getPropertyMapper(Class<?> type,String _field, Map<String, Object> property) {
+		PropertyModelMapperResource pptMapperModel=InstanceUtil.getInstance(PropertyModelMapperResource.class,property);
 		if(type!=null) {
 		  pptMapperModel.setTarget(FieldUtil.getField(type, _field, Access.PRIVATE));
 		}
@@ -149,11 +150,11 @@ public class JsonComponentMapperFactory extends AbstractModuleFactory<String,Com
 
 
 	@Override
-	protected void preregister(String key, ComponentMapper value) {
+	protected void preregister(String key, TypeModelMapperResource value) {
 	}
 
 
 	@Override
-	protected void postregister(String key, ComponentMapper value) {
+	protected void postregister(String key, TypeModelMapperResource value) {
 	}
 }

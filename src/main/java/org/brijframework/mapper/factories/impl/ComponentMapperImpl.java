@@ -1,11 +1,12 @@
 package org.brijframework.mapper.factories.impl;
 
 import org.brijframework.factories.impl.module.AbstractModuleFactory;
-import org.brijframework.mapper.factories.MapperFactory;
-import org.brijframework.mapper.model.ComponentMapper;
+import org.brijframework.model.mapper.factories.MapperFactory;
+import org.brijframework.model.mapper.factories.impl.ComponentMapperImpl;
+import org.brijframework.model.mapper.model.TypeModelMapperResource;
 import org.brijframework.support.config.SingletonFactory;
 
-public class ComponentMapperImpl extends AbstractModuleFactory<String,ComponentMapper> implements MapperFactory<String,ComponentMapper> {
+public class ComponentMapperImpl extends AbstractModuleFactory<String,TypeModelMapperResource> implements MapperFactory<String,TypeModelMapperResource> {
 
 	protected ComponentMapperImpl() {
 	}
@@ -25,10 +26,10 @@ public class ComponentMapperImpl extends AbstractModuleFactory<String,ComponentM
 		return this;
 	}
 
-	public ComponentMapper load(Class<?> target) {
-		ComponentMapper model=find(target.getSimpleName());
+	public TypeModelMapperResource load(Class<?> target) {
+		TypeModelMapperResource model=find(target.getSimpleName());
 		if(model==null) {
-			model = new ComponentMapper();
+			model = new TypeModelMapperResource();
 			model.setId(target.getSimpleName());
 			model.setType(target);
 			register(target.getSimpleName(),model);
@@ -37,11 +38,11 @@ public class ComponentMapperImpl extends AbstractModuleFactory<String,ComponentM
 	}
 
 	@Override
-	protected void preregister(String key, ComponentMapper value) {
+	protected void preregister(String key, TypeModelMapperResource value) {
 	}
 
 	@Override
-	protected void postregister(String key, ComponentMapper value) {
+	protected void postregister(String key, TypeModelMapperResource value) {
 	}
 
 }

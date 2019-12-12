@@ -4,9 +4,11 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 import org.brijframework.factories.impl.module.AbstractModuleFactory;
-import org.brijframework.mapper.factories.MapperFactory;
-import org.brijframework.mapper.model.PropertyMapper;
 import org.brijframework.model.factories.metadata.impl.TypeModelMetaDataFactoryImpl;
+import org.brijframework.model.mapper.factories.MapperFactory;
+import org.brijframework.model.mapper.factories.impl.annotation.AnnotationComponentMapperFactory;
+import org.brijframework.model.mapper.factories.impl.annotation.AnnotationPropertyMapperFactory;
+import org.brijframework.model.mapper.model.PropertyModelMapperResource;
 import org.brijframework.model.metadata.TypeModelMetaData;
 import org.brijframework.support.config.DepandOn;
 import org.brijframework.support.config.SingletonFactory;
@@ -19,7 +21,7 @@ import org.brijframework.util.reflect.ReflectionUtils;
 import org.brijframework.util.support.Access;
 
 @DepandOn(depand=AnnotationComponentMapperFactory.class)
-public class AnnotationPropertyMapperFactory extends AbstractModuleFactory<String,PropertyMapper> implements MapperFactory<String,PropertyMapper> {
+public class AnnotationPropertyMapperFactory extends AbstractModuleFactory<String,PropertyModelMapperResource> implements MapperFactory<String,PropertyModelMapperResource> {
 
 	protected AnnotationPropertyMapperFactory() {
 	}
@@ -55,9 +57,9 @@ public class AnnotationPropertyMapperFactory extends AbstractModuleFactory<Strin
 		}
 	}
 
-	public PropertyMapper register(Class<?> target, Field field, Mapper mapper) {
+	public PropertyModelMapperResource register(Class<?> target, Field field, Mapper mapper) {
 		Map<String, Object> properties = AnnotationUtil.getAnnotationData(mapper);
-		PropertyMapper modelMap = new PropertyMapper();
+		PropertyModelMapperResource modelMap = new PropertyModelMapperResource();
 		PropertyAccessorUtil.setProperties(modelMap, properties);
 		modelMap.setId(target.getSimpleName() + "_" + mapper.source());
 		TypeModelMetaData owner = TypeModelMetaDataFactoryImpl.getFactory().load(target);
@@ -69,13 +71,13 @@ public class AnnotationPropertyMapperFactory extends AbstractModuleFactory<Strin
 	}
 
 	@Override
-	protected void preregister(String key, PropertyMapper value) {
+	protected void preregister(String key, PropertyModelMapperResource value) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void postregister(String key, PropertyMapper value) {
+	protected void postregister(String key, PropertyModelMapperResource value) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -2,9 +2,10 @@ package org.brijframework.mapper.container;
 
 import org.brijframework.container.impl.module.AbstractModuleContainer;
 import org.brijframework.group.Group;
-import org.brijframework.mapper.factories.MapperFactory;
 import org.brijframework.model.container.asm.ModelMetaDataContainer;
 import org.brijframework.model.group.ModelMetaDataGroup;
+import org.brijframework.model.mapper.container.MapperContainer;
+import org.brijframework.model.mapper.factories.MapperFactory;
 import org.brijframework.support.config.SingletonFactory;
 import org.brijframework.support.config.DepandOn;
 import org.brijframework.util.reflect.InstanceUtil;

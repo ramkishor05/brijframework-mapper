@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import org.brijframework.model.metadata.TypeModelMetaData;
 import org.brijframework.model.metadata.asm.AbstractModelMetaData;
 
-public class PropertyMapper extends AbstractModelMetaData<Field> {
+public class PropertyModelMapperResource extends AbstractModelMetaData<Field> {
 
 	private String source;
 

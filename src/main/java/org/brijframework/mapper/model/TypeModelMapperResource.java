@@ -3,9 +3,10 @@ package org.brijframework.mapper.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.brijframework.model.mapper.model.PropertyModelMapperResource;
 import org.brijframework.model.resource.asm.AbstractModelResource;
 
-public class ComponentMapper  extends AbstractModelResource<Class<?>>  {
+public class TypeModelMapperResource  extends AbstractModelResource<Class<?>>  {
 
 	private String source;
 
@@ -13,16 +14,16 @@ public class ComponentMapper  extends AbstractModelResource<Class<?>>  {
 	
 	private Class<?> type;
 	
-	private Map<String,PropertyMapper> properties;
+	private Map<String,PropertyModelMapperResource> properties;
 	
-	public Map<String, PropertyMapper> getProperties() {
+	public Map<String, PropertyModelMapperResource> getProperties() {
 		if(properties==null) {
-			properties=new HashMap<String, PropertyMapper>();
+			properties=new HashMap<String, PropertyModelMapperResource>();
 		}
 		return properties;
 	}
 	
-	public void setProperties(Map<String, PropertyMapper> properties) {
+	public void setProperties(Map<String, PropertyModelMapperResource> properties) {
 		this.properties = properties;
 	}
 	
